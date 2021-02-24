@@ -19,6 +19,12 @@ class TodosModel {
     return TodosModel.model.create(docs)
   }
 
+  static updateTodo (docs) {
+    const { id } = docs
+
+    return TodosModel.model.updateOne({ id }, docs)
+  }
+
   static deleteTodo (id) {
     const conditions = { _id: id }
 

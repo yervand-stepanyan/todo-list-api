@@ -36,6 +36,19 @@ class TodosService {
     }
   }
 
+  static async updateTodo (request, response, next) {
+    const { description, done, id } = request.body
+
+    try {
+      const payload = { description, done, id }
+      const todo = await TodosModel.updateTodo(payload)
+
+      return response.json(todo)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   static async deleteTodo (request, response, next) {
     const { id } = request.params
 

@@ -11,6 +11,9 @@ router.get('/:id',
 router.post('/',
   TodosService.addTodo
 )
+router.post('/:id',
+  TodosService.updateTodo
+)
 router.delete('/:id',
   TodosService.deleteTodo
 )
