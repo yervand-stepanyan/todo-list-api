@@ -9,6 +9,12 @@ class TodosModel {
     return TodosModel.model.find(conditions)
   }
 
+  static getTodoById (id) {
+    const conditions = { id }
+
+    return TodosModel.model.findOne(conditions)
+  }
+
   static addTodo (docs) {
     return TodosModel.model.create(docs)
   }

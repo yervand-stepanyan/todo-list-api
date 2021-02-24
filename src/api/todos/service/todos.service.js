@@ -11,6 +11,18 @@ class TodosService {
     }
   }
 
+  static async getTodoById (request, response, next) {
+    const { id } = request.params
+
+    try {
+      const result = await TodosModel.getTodoById(id)
+
+      return response.json(result)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   static async addTodo (request, response, next) {
     const { description, done, id } = request.body
 

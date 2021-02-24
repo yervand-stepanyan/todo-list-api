@@ -5,6 +5,9 @@ const TodosService = require('./service/todos.service')
 router.get('/',
   TodosService.getTodos
 )
+router.get('/:id',
+  TodosService.getTodoById
+)
 router.post('/',
   TodosService.addTodo
 )
