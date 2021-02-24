@@ -1,17 +1,34 @@
-const express = require('express')
-const app = express()
+const bodyParser = require('body-parser')
 const cors = require('cors')
+const express = require('express')
 const morgan = require('morgan')
+
+const { MONGO_URI } = require('./config/variables.config')
+
+const { MongoStorage } = require('./storage')
+
+const Api = require('./api')
+
+const app = express()
+
+MongoStorage.init(MONGO_URI).catch(console.error)
 
 app.use(morgan('dev'))
 
-app.use(cors({
-  origin: '*',
-  methods: ['GET'],
-  allowedHeaders: ['Content-Type'],
-  credentials: true,
-  optionsSuccessStatus: 200,
-  maxAge: -1
-}))
+app.use(
+  cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Authorization', 'Content-Type', 'Origin'],
+    credentials: true,
+    optionsSuccessStatus: 200,
+    maxAge: -1
+  })
+)
+
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
+app.use('/api', Api)
 
 module.exports = app
