@@ -10,7 +10,7 @@ class TodosModel {
   }
 
   static getTodoById (id) {
-    const conditions = { id }
+    const conditions = { _id: id }
 
     return TodosModel.model.findOne(conditions)
   }
@@ -22,7 +22,7 @@ class TodosModel {
   static updateTodo (docs) {
     const { id } = docs
 
-    return TodosModel.model.updateOne({ id }, docs)
+    return TodosModel.model.updateOne({ _id: id }, docs)
   }
 
   static deleteTodo (id) {
